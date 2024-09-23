@@ -4,9 +4,11 @@ It gives you full control over layout-specific shortcuts.
 Currently:  
 wip (potential bugs)  
 sub-optimal code  
-does not support up/down key presses  
-works for qwerty - US  
+Disables Caps  
+Caps + zxcv... etc. for one hand shortcuts
+does not support up/down key presses (use ctrl + 4 for that)  
+works for Windows QWERTY - US  
 Alt + 1 programmer DVORAK  
 Alt + 2 QWERTY  
 Alt + 3 Rus (ЙЦУКЕН)  
-Alt + 4 Disable all hotkeys  
+Alt + 4 Disable all hotkeys (except caps for muscle memory)  
