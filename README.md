@@ -5,7 +5,7 @@ Currently:
 wip (potential bugs)  
 sub-optimal code  
 Disables Caps  
-Caps + zxcv... etc. for one hand shortcuts
+Caps + zxcv... etc. for one hand shortcuts  
 does not support up/down key presses (use ctrl + 4 for that)  
 works for Windows QWERTY - US  
 Alt + 1 programmer DVORAK  
