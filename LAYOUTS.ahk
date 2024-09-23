@@ -325,6 +325,27 @@ Alt & 1:: {
 
 ;all layouts off/on
 Alt & 4::Suspend True  ; Ctrl+Alt+S
+
+; Disable CapsLock
+CapsLock::Return
+
+CapsLock & z::Send("^z")
+CapsLock & x::Send("^x")
+CapsLock & c::Send("^c")
+CapsLock & v::Send("^v")
+CapsLock & a::Send("^a")
+CapsLock & s::Send("^s")
+CapsLock & d::Send("^f")
+CapsLock & f::Send("^d")
+CapsLock & g::Send("^z")
+CapsLock & q::Send("^x")
+CapsLock & w::Send("^c")
+CapsLock & e::Send("^v")
+CapsLock & r::Send("^a")
+CapsLock & t::Send("^s")
+CapsLock & y::Send("^f")
+
+
 #SuspendExempt False
 
 SetLayout(layout, shift_layout) {
@@ -359,23 +380,23 @@ SetLayout(layout, shift_layout) {
     }
 	; Shift Ctrl variants
     for key, value in layout {
-		if ( key = "z" ) {
-			Hotkey "^+" key, SendInputKey.Bind(, "^z")
-		} else if ( key = "x" ) {
-			Hotkey "^+" key, SendInputKey.Bind(, "^x")
-		} else if ( key = "c" ) {
-			Hotkey "^+" key, SendInputKey.Bind(, "^c")
-		} else if ( key = "v" ) {
-			Hotkey "^+" key, SendInputKey.Bind(, "^v")
-		} else if ( key = "s" ) {
-			Hotkey "^+" key, SendInputKey.Bind(, "^s")
-		} else if ( key = "f" ) {
-			Hotkey "^+" key, SendInputKey.Bind(, "^f")
-		} else if ( key = "a" ) {
-			Hotkey "^+" key, SendInputKey.Bind(, "^a")
-		} else {
+	;	if ( key = "z" ) {
+	;		Hotkey "^+" key, SendInputKey.Bind(, "^z")
+	;	} else if ( key = "x" ) {
+	;		Hotkey "^+" key, SendInputKey.Bind(, "^x")
+	;	} else if ( key = "c" ) {
+	;		Hotkey "^+" key, SendInputKey.Bind(, "^c")
+	;	} else if ( key = "v" ) {
+	;		Hotkey "^+" key, SendInputKey.Bind(, "^v")
+	;	} else if ( key = "s" ) {
+	;		Hotkey "^+" key, SendInputKey.Bind(, "^s")
+	;	} else if ( key = "f" ) {
+	;		Hotkey "^+" key, SendInputKey.Bind(, "^f")
+	;	} else if ( key = "a" ) {
+	;		Hotkey "^+" key, SendInputKey.Bind(, "^a")
+	;	} else {
 			Hotkey "^+" key, SendInputKey.Bind(, "^+" value)
-		}
+	;	}
     }
 }
 
