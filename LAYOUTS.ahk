@@ -311,6 +311,42 @@ CurrentLayout := ""
 ; Map to store layout for each process
 WindowLayouts := Map()
 
+
+
+; Load the WindowLayouts from file at startup
+LoadWindowLayouts() {
+    global WindowLayouts
+    FilePath := A_ScriptDir "\WindowLayouts.txt" ; File path for the layout data
+    if FileExist(FilePath) {
+        fileContent := FileRead(FilePath)
+        Loop Parse, fileContent, "`n"  ; Loop through each line in the file
+        {
+            line := A_LoopField
+            parts := StrSplit(line, ",") ; Split the line into process name and layout
+            if (parts.Length = 2) { ; Check if there are exactly two parts
+                processName := parts[1]
+                layout := parts[2]
+                WindowLayouts[processName] := layout ; Store the layout for the process
+            }
+        }
+    }
+}
+
+; Save the WindowLayouts to file
+SaveWindowLayouts() {
+    global WindowLayouts
+    FilePath := A_ScriptDir "\WindowLayouts.txt" ; File path for the layout data
+    if FileExist(FilePath) {
+        FileDelete FilePath  ; Delete the file if it exists
+    }
+    FileAppend "", FilePath ; Create a new file
+    for process, layout in WindowLayouts {
+        FileAppend process "," layout "`n", FilePath ; Append each key-value pair to the file
+    }
+}
+
+
+
 ; Functions to switch to specific layouts
 SwitchToRussian() {
     SetCapsLockState "AlwaysOff"
@@ -352,9 +388,6 @@ ApplyLayout() {
         DisableLayouts()
     }
 }
-
-SwitchToDvorak()
-UpdateCurrentProcessLayout() ; Update layout for current process
 
 
 ; Update the map with the current process and layout
@@ -495,6 +528,11 @@ SendInputKey(this, value) {
 }
 
 
+LoadWindowLayouts()
+SwitchToDvorak()
+UpdateCurrentProcessLayout() ; Update layout for current process
+
+lastSaveTime := 0
 
 Loop { ; Get the active window's process name
     global CurrentLayout
@@ -510,6 +548,17 @@ Loop { ; Get the active window's process name
             ApplyLayout()
         }
     }
-    Sleep 1000
+
+
+
+    ; Save the WindowLayouts to file every 30 seconds
+    global lastSaveTime
+    if ((A_TickCount - lastSaveTime) >= 30000) { ; 30 seconds in milliseconds
+        SaveWindowLayouts() ; Call the save function
+        lastSaveTime := A_TickCount ; Update the last save time
+    }
+
+
+    Sleep 2000
 }
 
