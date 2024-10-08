@@ -302,7 +302,7 @@ russian_shift := Map(
     "'", "Э", 
     ",", "+б", 
     ".", "Ю", 
-    "/", "+/"
+    "/", ","
 )
 #SuspendExempt
 
