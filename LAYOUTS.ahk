@@ -284,12 +284,12 @@ russian_shift := Map(
     "m", "Ь", 
     GRAVE, "Ё", 
     "1", "+1", 
-    "2", "+2", 
+    "2", "+'", 
     "3", "+3",
-    "4", "+4", 
+    "4", ";", 
     "5", "+5", 
-    "6", "+6", 
-    "7", "+7", 
+    "6", "+;", 
+    "7", "?", 
     "8", "+8", 
     "9", "+9", 
     "0", "+0", 
@@ -551,14 +551,14 @@ Loop { ; Get the active window's process name
 
 
 
-    ; Save the WindowLayouts to file every 30 seconds
+    ; Save the WindowLayouts to file every 300 seconds
     global lastSaveTime
-    if ((A_TickCount - lastSaveTime) >= 30000) { ; 30 seconds in milliseconds
+    if ((A_TickCount - lastSaveTime) >= 300000) { ; 30 seconds in milliseconds
         SaveWindowLayouts() ; Call the save function
         lastSaveTime := A_TickCount ; Update the last save time
     }
 
 
-    Sleep 2000
+    Sleep 500
 }
 
