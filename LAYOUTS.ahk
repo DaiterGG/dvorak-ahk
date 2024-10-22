@@ -538,7 +538,13 @@ Loop { ; Get the active window's process name
     global CurrentLayout
     global WindowLayouts
     if (WinExist("A")) { ; Check if there is an active window
+
+        try{
         currentProcess := WinGetProcessName("A") ; Use WinGetProcessName for AutoHotkey v2
+        } catch Error as err {
+            currentProcess := "Error"
+        }
+
         if !(WindowLayouts.Has(currentProcess)) {
             ; If this window's process has no saved layout, store the current one
             WindowLayouts[currentProcess] := CurrentLayout
