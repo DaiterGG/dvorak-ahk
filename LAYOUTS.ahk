@@ -393,7 +393,12 @@ ApplyLayout() {
 ; Update the map with the current process and layout
 UpdateCurrentProcessLayout() {
     global WindowLayouts, CurrentLayout
+    try {
     currentProcess := WinGetProcessName("A") ; Use WinGetProcessName for AutoHotkey v2
+    } catch Error as err 
+    {
+        currentProcess := "Error"
+    }
     WindowLayouts[currentProcess] := CurrentLayout
 }
 ; Switch to Russian layout
@@ -433,10 +438,20 @@ Capslock & 4:: {
   }
 
   ; Example usage (you can call this method whenever you want to show the layouts)
-  Capslock & 5:: { ; Bind this to a key combination (e.g., Capslock + 5)
-      ShowWindowLayouts()
-  }
+  ; Capslock & 5:: { ; Bind this to a key combination (e.g., Capslock + 5)
+  ;     ShowWindowLayouts()
+  ; }
 
+;My vm switch bind
+Swap(key){
+    ; Hotkey  WinGetTitle("A"),Swap
+    try {
+    WinActivate "Windows13 [Running] - Oracle VirtualBox"
+    } catch Error as err { 
+
+ }
+}
+Hotkey "#z", Swap
 
 ; One hand shortcuts
 CapsLock & z::Send("{Blind}^z")
@@ -469,7 +484,6 @@ SetLayout(layout, shift_layout) {
     for key, value in layout {
         Hotkey key, SendInputKey.Bind(, value)
     }
-    
     ; Add Shift modifier mappings
     for key, value in shift_layout {
         Hotkey "+" key, SendInputKey.Bind(, value)
@@ -488,7 +502,13 @@ SetLayout(layout, shift_layout) {
     }
     ;Shift Alt variants
     for key, value in layout {
+        ;My vm switch bind
+        if ( key = "z" ) {
+            Hotkey "+!" key, Swap
+        }
+        else {
         Hotkey "+!" key, SendInputKey.Bind(, "+!" value)
+        }
     }
     ;Shift Ctrl Alt variants
     for key, value in layout {
