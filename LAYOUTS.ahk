@@ -290,17 +290,17 @@ russian_shift := Map(
     "5", "+5", 
     "6", "+;", 
     "7", "?", 
-    "8", "+8", 
-    "9", "+9", 
-    "0", "+0", 
-    "-", "+-", 
+    "8", "*", 
+    "9", "(", 
+    "0", ")", 
+    "-", "_", 
     "=", "+=", 
-    "[", "+х", 
-    "]", "+ъ", 
-    "\", "+\",
-    ";", "+ж", 
+    "[", "Х", 
+    "]", "Ъ", 
+    "\", "/",
+    ";", "Ж", 
     "'", "Э", 
-    ",", "+б", 
+    ",", "Б", 
     ".", "Ю", 
     "/", ","
 )
@@ -310,8 +310,6 @@ russian_shift := Map(
 CurrentLayout := ""
 ; Map to store layout for each process
 WindowLayouts := Map()
-
-
 
 ; Load the WindowLayouts from file at startup
 LoadWindowLayouts() {
@@ -446,12 +444,31 @@ Capslock & 4:: {
 Swap(key){
     ; Hotkey  WinGetTitle("A"),Swap
     try {
-    WinActivate "Windows13 [Running] - Oracle VirtualBox"
+    WinActivate "Arch btw [Running] - Oracle VirtualBox"
     } catch Error as err { 
 
  }
 }
 Hotkey "#z", Swap
+
+;Toggle bluetooth
+#c:: {
+    Send '{LWin}'
+    Sleep 200
+    Send 'bluetooth'
+    Sleep 500
+    Send '{Enter}'
+    Sleep 2000
+    Send '{Tab}'
+    Sleep 30
+    Send '{Tab}'
+    Sleep 30
+    Send '{Space}'
+    Sleep 300
+    Send '!{f4}'
+}
+
+
 
 ; One hand shortcuts
 CapsLock & z::Send("{Blind}^z")
